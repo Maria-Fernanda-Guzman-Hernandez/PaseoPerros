@@ -38,7 +38,6 @@ Abre `http://localhost:3000`.
 
 La app no está conectada a ninguna base de datos. Los endpoints guardan perros, paseadores y citas en memoria temporal mientras el servidor está encendido.
 
-Cuando definas la nueva BD, el punto principal para conectar persistencia será `src/routes.js`, reemplazando las funciones que hoy leen y escriben en el objeto `store`.
 
 ## Modos Incluidos
 
