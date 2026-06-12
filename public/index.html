@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paseo Feliz | Roles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="landing-screen" id="landing-screen">
+      <nav class="landing-nav">
+        <a class="brand" href="#inicio" aria-label="Paseo Feliz inicio">
+          <span class="brand-mark">PP</span>
+          <span>Paseo Feliz</span>
+        </a>
+        <div class="landing-menu">
+          <button class="button secondary" type="button" data-open-auth="login">Iniciar sesión</button>
+          <button class="button primary" type="button" data-open-auth="owner">Crear nueva cuenta</button>
+        </div>
+      </nav>
+
+      <section class="landing-hero" id="inicio">
+        <div class="landing-copy">
+          <p class="eyebrow">Match inteligente para perros</p>
+          <h1>El paseador ideal para tu perro.</h1>
+          <p>
+            Paseo Feliz compara raza, tamaño, edad y energía para recomendar paseadores que sí se adaptan
+            a las necesidades de tu mascota. Tu perro recibe un paseo más seguro, y el paseador sabe exactamente
+            qué tipo de compañero tendrá.
+          </p>
+          <div class="landing-actions">
+            <button class="button primary" type="button" data-open-auth="owner">Soy dueño de un perro</button>
+            <button class="button secondary" type="button" data-open-auth="walker">Soy paseador</button>
+          </div>
+        </div>
+
+        <aside class="schnauzer-card">
+          <div class="schnauzer-image-wrap">
+            <img id="schnauzer-image" src="https://cdn2.thedogapi.com/images/SJIUQl9NX.jpg" alt="Schnauzer desde TheDogAPI">
+          </div>
+          <div class="schnauzer-caption">
+            <span class="pill" id="schnauzer-name">Schnauzer</span>
+            <h2 id="schnauzer-temperament">Alerta, obediente y enérgico</h2>
+            <p id="schnauzer-description">Un ejemplo de perfil que ayuda a encontrar paseadores preparados para su temperamento.</p>
+          </div>
+        </aside>
+      </section>
+    </section>
+
+    <section class="auth-screen hidden" id="auth-screen">
+      <div class="auth-hero">
+        <p class="eyebrow">Paseo Feliz</p>
+        <h1>Acceso para dueños y paseadores.</h1>
+        <p>Elige si quieres iniciar sesión o crear una cuenta como dueño de perro o como paseador.</p>
+        <button class="button secondary" id="back-home-button" type="button">Volver al inicio</button>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-tabs" aria-label="Acceso">
+          <button class="auth-tab active" type="button" data-auth-tab="login">Iniciar sesión</button>
+          <button class="auth-tab" type="button" data-auth-tab="owner">Crear cuenta dueño</button>
+          <button class="auth-tab" type="button" data-auth-tab="walker">Crear cuenta paseador</button>
+        </div>
+
+        <form class="auth-panel active" id="login-form" data-auth-panel="login">
+          <h2>Entrar</h2>
+          <label>
+            Teléfono
+            <input name="phone" required maxlength="20" placeholder="555-1234">
+          </label>
+          <label>
+            Contraseña
+            <input name="password" required type="password" minlength="4" placeholder="Mínimo 4 caracteres">
+          </label>
+          <button class="button primary" type="submit">Iniciar sesión</button>
+        </form>
+
+        <form class="auth-panel" id="owner-register-form" data-auth-panel="owner">
+          <h2>Registro de dueño</h2>
+          <div class="form-row">
+            <label>
+              Nombre del dueño
+              <input name="NombreDueno" required maxlength="100" placeholder="Ana López">
+            </label>
+            <label>
+              Teléfono
+              <input name="TelefonoDueno" required maxlength="20" placeholder="555-1234">
+            </label>
+          </div>
+          <label>
+            Contraseña
+            <input name="password" required type="password" minlength="4" placeholder="Mínimo 4 caracteres">
+          </label>
+          <div class="divider"><span>Perfil del perro</span></div>
+          <label>
+            Nombre del perro
+            <input name="Nombre" required maxlength="80" placeholder="Firulais">
+          </label>
+          <label>
+            Raza
+            <input class="breed-search" data-breed-target="owner-breed-id" placeholder="Clic para elegir raza" autocomplete="off" required>
+            <input id="owner-breed-id" name="Raza_API_ID" type="hidden" required>
+          </label>
+          <div class="breed-preview"></div>
+          <div class="form-row">
+            <label>
+              Edad
+              <input name="Edad" type="number" min="0" max="25" placeholder="4">
+            </label>
+            <label>
+              Tamaño
+              <select name="Tamano" required>
+                <option value="Pequeño">Pequeño</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Nivel de energía
+            <select name="Nivel_Energia" required>
+              <option value="Alto">Alto / hiperactivo</option>
+              <option value="Medio">Medio</option>
+              <option value="Bajo">Bajo</option>
+            </select>
+          </label>
+          <label>
+            Dirección
+            <input name="Direccion" maxlength="50" placeholder="Colonia Centro">
+          </label>
+          <button class="button primary" type="submit">Crear cuenta de dueño</button>
+        </form>
+
+        <form class="auth-panel" id="walker-register-form" data-auth-panel="walker">
+          <h2>Registro de paseador</h2>
+          <div class="form-row">
+            <label>
+              Nombre
+              <input name="Nombre" required maxlength="100" placeholder="Carlos Ruiz">
+            </label>
+            <label>
+              Teléfono
+              <input name="Telefono" required maxlength="20" placeholder="555-5678">
+            </label>
+          </div>
+          <label>
+            Contraseña
+            <input name="password" required type="password" minlength="4" placeholder="Mínimo 4 caracteres">
+          </label>
+          <label>
+            Especialidad de raza
+            <input class="breed-search" data-breed-target="walker-breed-id" placeholder="Clic para elegir raza" autocomplete="off" required>
+            <input id="walker-breed-id" name="Especialidad_Raza_API_ID" type="hidden" required>
+          </label>
+          <div class="breed-preview"></div>
+          <div class="form-row">
+            <label>
+              Tamaño aceptado
+              <select name="Capacidad_Tamano" required>
+                <option value="Pequeño">Pequeño</option>
+                <option value="Mediano">Mediano</option>
+                <option value="Grande">Grande</option>
+              </select>
+            </label>
+            <label>
+              Tarifa
+              <input name="Tarifa" required type="number" min="0" step="0.01" placeholder="150">
+            </label>
+          </div>
+          <label class="check-row">
+            <input name="AceptaHiperactivos" type="checkbox">
+            Acepta perros hiperactivos
+          </label>
+          <label>
+            Dirección
+            <input name="Direccion" maxlength="50" placeholder="Parque Norte">
+          </label>
+          <button class="button primary" type="submit">Crear cuenta de paseador</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow" id="session-role">Sesión</p>
+          <h1 id="session-title">Panel</h1>
+        </div>
+        <div class="dashboard-actions">
+          <button class="button secondary" id="logout-button" type="button">Salir</button>
+        </div>
+      </header>
+
+      <section class="role-dashboard hidden" id="owner-dashboard">
+        <nav class="dashboard-tabs" aria-label="Panel dueño">
+          <button class="dashboard-tab active" type="button" data-owner-tab="profile">Perfil de mi perro</button>
+          <button class="dashboard-tab" type="button" data-owner-tab="schedule">Agendar cita</button>
+          <button class="dashboard-tab" type="button" data-owner-tab="appointments">Mis citas</button>
+        </nav>
+
+        <div class="dashboard-panel active" data-owner-panel="profile">
+          <form class="panel form-card" id="owner-dog-form">
+            <h2>Perfil de mi perro</h2>
+            <label>
+              Nombre del perro
+              <input name="Nombre" required maxlength="80">
+            </label>
+            <label>
+              Raza
+              <input class="breed-search" data-breed-target="owner-profile-breed-id" autocomplete="off" required>
+              <input id="owner-profile-breed-id" name="Raza_API_ID" type="hidden" required>
+            </label>
+            <div class="breed-preview"></div>
+            <div class="form-row">
+              <label>
+                Edad
+                <input name="Edad" type="number" min="0" max="25">
+              </label>
+              <label>
+                Tamaño
+                <select name="Tamano" required>
+                  <option value="Pequeño">Pequeño</option>
+                  <option value="Mediano">Mediano</option>
+                  <option value="Grande">Grande</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Nivel de energía
+              <select name="Nivel_Energia" required>
+                <option value="Alto">Alto / hiperactivo</option>
+                <option value="Medio">Medio</option>
+                <option value="Bajo">Bajo</option>
+              </select>
+            </label>
+            <div class="form-row">
+              <label>
+                Nombre del dueño
+                <input name="NombreDueno" required maxlength="100">
+              </label>
+              <label>
+                Teléfono
+                <input name="TelefonoDueno" required maxlength="20">
+              </label>
+            </div>
+            <label>
+              Dirección
+              <input name="Direccion" maxlength="50">
+            </label>
+            <button class="button primary" type="submit">Guardar cambios</button>
+          </form>
+        </div>
+
+        <div class="dashboard-panel" data-owner-panel="schedule">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>Paseadores compatibles</h2>
+                <p>Elige una fecha y agenda con el paseador recomendado.</p>
+              </div>
+              <button class="button secondary" id="refresh-matches" type="button">Actualizar matches</button>
+            </div>
+            <div class="cards-list" id="owner-matches"></div>
+          </div>
+        </div>
+
+        <div class="dashboard-panel" data-owner-panel="appointments">
+          <div class="panel">
+            <div class="panel-title">
+              <h2>Mis citas</h2>
+              <span>Cancelación con mínimo 1 día de anticipación</span>
+            </div>
+            <div class="cards-list" id="owner-appointments"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="role-dashboard hidden" id="walker-dashboard">
+        <nav class="dashboard-tabs" aria-label="Panel paseador">
+          <button class="dashboard-tab active" type="button" data-walker-tab="profile">Mi perfil</button>
+          <button class="dashboard-tab" type="button" data-walker-tab="calendar">Calendario</button>
+          <button class="dashboard-tab" type="button" data-walker-tab="appointments">Citas</button>
+        </nav>
+
+        <div class="dashboard-panel active" data-walker-panel="profile">
+          <form class="panel form-card" id="walker-profile-form">
+            <h2>Mi perfil de paseador</h2>
+            <div class="form-row">
+              <label>
+                Nombre
+                <input name="Nombre" required maxlength="100">
+              </label>
+              <label>
+                Teléfono
+                <input name="Telefono" required maxlength="20">
+              </label>
+            </div>
+            <label>
+              Especialidad de raza
+              <input class="breed-search" data-breed-target="walker-profile-breed-id" autocomplete="off" required>
+              <input id="walker-profile-breed-id" name="Especialidad_Raza_API_ID" type="hidden" required>
+            </label>
+            <div class="breed-preview"></div>
+            <div class="form-row">
+              <label>
+                Tamaño aceptado
+                <select name="Capacidad_Tamano" required>
+                  <option value="Pequeño">Pequeño</option>
+                  <option value="Mediano">Mediano</option>
+                  <option value="Grande">Grande</option>
+                </select>
+              </label>
+              <label>
+                Tarifa
+                <input name="Tarifa" required type="number" min="0" step="0.01">
+              </label>
+            </div>
+            <label class="check-row">
+              <input name="AceptaHiperactivos" type="checkbox">
+              Acepta perros hiperactivos
+            </label>
+            <label>
+              Dirección
+              <input name="Direccion" maxlength="50">
+            </label>
+            <button class="button primary" type="submit">Guardar perfil</button>
+          </form>
+        </div>
+
+        <div class="dashboard-panel" data-walker-panel="calendar">
+          <div class="panel calendar-panel">
+            <div class="calendar-header">
+              <button class="icon-button" id="prev-month" type="button" aria-label="Mes anterior">‹</button>
+              <h2 id="calendar-title">Calendario</h2>
+              <button class="icon-button" id="next-month" type="button" aria-label="Mes siguiente">›</button>
+            </div>
+            <div class="calendar-grid calendar-weekdays">
+              <span>Dom</span>
+              <span>Lun</span>
+              <span>Mar</span>
+              <span>Mié</span>
+              <span>Jue</span>
+              <span>Vie</span>
+              <span>Sáb</span>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+          </div>
+        </div>
+
+        <div class="dashboard-panel" data-walker-panel="appointments">
+          <div class="panel">
+            <div class="panel-title">
+              <h2>Próximas citas</h2>
+              <span>Cambia estatus cuando sea necesario</span>
+            </div>
+            <div class="cards-list" id="walker-appointments"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <button class="theme-fab" type="button" data-theme-toggle aria-label="Cambiar a modo claro">
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4.5V2m0 20v-2.5M4.5 12H2m20 0h-2.5M5.64 5.64 3.87 3.87m16.26 16.26-1.77-1.77m0-12.72 1.77-1.77M3.87 20.13l1.77-1.77"/>
+      <circle cx="12" cy="12" r="4.5"/>
+    </svg>
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 7.2 7.2 0 1 0 20.5 15.5Z"/>
+    </svg>
+  </button>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

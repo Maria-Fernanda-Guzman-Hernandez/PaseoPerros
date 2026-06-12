@@ -1,0 +1,24 @@
+{
+  "name": "paseo-perros",
+  "version": "1.0.0",
+  "description": "Sistema de paseadores para perros con Node.js y JavaScript puro.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "perros",
+    "paseadores",
+    "vanilla-js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "pg": "^8.21.0"
+  }
+}
