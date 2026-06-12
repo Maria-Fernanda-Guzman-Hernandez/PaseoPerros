@@ -5,6 +5,7 @@ Sistema web para asignar paseadores a perros según raza, tamaño, edad y nivel 
 ## Requisitos
 
 - Node.js 18 o superior.
+- Base de datos PostgreSQL. El proyecto está configurado para usar Neon.
 
 ## Configuración
 
@@ -20,10 +21,11 @@ npm install
 cp .env.example .env
 ```
 
-3. Edita `.env` si quieres cambiar el puerto:
+3. Edita `.env` con el puerto y la conexión de PostgreSQL en Neon:
 
 ```env
 PORT=3000
+DATABASE_URL=postgresql://usuario:password@host/base_de_datos?sslmode=verify-full
 ```
 
 4. Inicia la app:
@@ -34,11 +36,31 @@ npm start
 
 Abre `http://localhost:3000`.
 
-## Almacenamiento Actual
+Para verificar que la app está conectada a PostgreSQL, abre:
 
-La app no está conectada a ninguna base de datos. Los endpoints guardan perros, paseadores y citas en memoria temporal mientras el servidor está encendido.
+```text
+http://localhost:3000/api/health
+```
 
-Cuando definas la nueva BD, el punto principal para conectar persistencia será `src/routes.js`, reemplazando las funciones que hoy leen y escriben en el objeto `store`.
+Debe responder:
+
+```json
+{"ok":true,"database":"connected"}
+```
+
+## Base de Datos
+
+La app guarda la información en PostgreSQL usando Neon como proveedor de base de datos. La conexión se configura con la variable `DATABASE_URL` del archivo `.env`.
+
+Tablas principales:
+
+- `usuarios`
+- `perros`
+- `paseadores`
+- `citas`
+- `razas_perros_cache`
+
+La conexión está centralizada en `src/db.js` usando `pg`, y las rutas de `src/routes.js` leen y escriben directamente en PostgreSQL.
 
 ## Modos Incluidos
 
@@ -49,11 +71,17 @@ Cuando definas la nueva BD, el punto principal para conectar persistencia será 
 
 ## Endpoints Principales
 
+- `GET /api/health`
 - `GET /api/breeds`
+- `POST /api/auth/register-owner`
+- `POST /api/auth/register-walker`
+- `POST /api/auth/login`
+- `GET /api/me`
 - `GET /api/dogs`
-- `POST /api/dogs`
+- `PUT /api/dogs/:id`
 - `GET /api/walkers`
-- `POST /api/walkers`
+- `PUT /api/walkers/:id`
+- `GET /api/walkers/matches/:dogId`
 - `POST /api/match`
 - `GET /api/appointments`
 - `POST /api/appointments`
