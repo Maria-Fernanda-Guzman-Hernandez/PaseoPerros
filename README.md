@@ -62,8 +62,7 @@ Tablas principales:
 - `razas_perros_cache`
 
 La conexión está centralizada en `src/db.js` usando `pg`, y las rutas de `src/routes.js` leen y escriben directamente en PostgreSQL.
-=======
->>>>>>> fb6b718207d51405c1a2ec01db61515b61e861e6
+
 
 ## Modos Incluidos
 
